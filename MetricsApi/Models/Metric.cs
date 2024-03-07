@@ -3,7 +3,7 @@ namespace MetricsApi.Models
   public class Metric
   {
     public int MetricId { get; set; }
-    public string Value { get; set; }
+    public int Value { get; set; }
     public DateTime Date { get; set; }
     public int UserId { get; set; }
     public int PortalId { get; set; }
