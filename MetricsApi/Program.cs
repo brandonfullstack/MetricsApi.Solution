@@ -1,7 +1,18 @@
 using MetricsApi.Models;
 using Microsoft.EntityFrameworkCore;
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      builder =>
+                      {
+                          builder.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+                      });
+});
 
 builder.Services.AddControllers();
 
@@ -28,6 +39,8 @@ else
 {
     app.UseHttpsRedirection();
 }
+
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 
