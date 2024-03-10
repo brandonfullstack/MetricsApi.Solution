@@ -16,11 +16,11 @@ namespace MetricsApi.Models
     {
       builder.Entity<Metric>()
         .HasData(
-          new Metric { MetricId = 1, Value = 2, Date = new DateTime(2024,03,06,3,15,1), UserId = 1, PortalId = 1, InteractionId = 1 },
-          new Metric { MetricId = 2, Value = 7, Date = new DateTime(2024,03,06,4,15,0), UserId = 2, PortalId = 2, InteractionId = 2 },
-          new Metric { MetricId = 3, Value = 9, Date = new DateTime(2024,03,06,20,15,0), UserId = 3, PortalId = 3, InteractionId = 3 },
-          new Metric { MetricId = 4, Value = 23, Date = new DateTime(2024,03,06,6,15,0), UserId = 4, PortalId = 4, InteractionId = 4 },
-          new Metric { MetricId = 5, Value = 15, Date = new DateTime(2024,03,06), UserId = 5, PortalId = 5, InteractionId = 5 }
+          new Metric { MetricId = 1, Value = 2, Date = new DateOnly(2024,03,06), UserId = 1, PortalId = 1, InteractionId = 1 },
+          new Metric { MetricId = 2, Value = 7, Date = new DateOnly(2024,03,06), UserId = 2, PortalId = 2, InteractionId = 2 },
+          new Metric { MetricId = 3, Value = 9, Date = new DateOnly(2024,03,06), UserId = 3, PortalId = 3, InteractionId = 3 },
+          new Metric { MetricId = 4, Value = 23, Date = new DateOnly(2024,03,06), UserId = 4, PortalId = 4, InteractionId = 4 },
+          new Metric { MetricId = 5, Value = 15, Date = new DateOnly(2024,03,06), UserId = 5, PortalId = 5, InteractionId = 5 }
         );
 
       builder.Entity<User>()

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MetricsApi.Models;
+using System.Diagnostics;
 
 namespace MetricsApi.Controllers
 {
@@ -36,6 +37,24 @@ namespace MetricsApi.Controllers
       return metric;
     }
 
+    // GET api/metrics/date
+    [HttpGet("bydate/{date}")]
+    public async Task<ActionResult<IEnumerable<Metric>>> GetMetricsByDate(string date)
+    {
+      
+
+      if(DateOnly.TryParse(date, out var selectedDate) is false)
+      {
+        BadRequest();
+      }
+
+        var metrics = await _db.Metrics.Where(metric => metric.Date == selectedDate).ToListAsync();
+
+
+        Trace.WriteLine(date.ToString());
+      return metrics;
+    }
+
     // POST api/metrics
     [HttpPost]
     public async Task<ActionResult<Metric>> Post(Metric metric)
@@ -53,8 +72,12 @@ namespace MetricsApi.Controllers
       {
         return BadRequest();
       }
+      
+      var existingMetric = await _db.Metrics.FindAsync(id);
 
-      _db.Metrics.Update(metric);
+      existingMetric.Value = metric.Value;
+
+      _db.Metrics.Update(existingMetric);
 
       try
       {
